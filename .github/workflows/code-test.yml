@@ -24,6 +24,7 @@ jobs:
         
     - name: Test build
       run: |
+        git submodule update --init --recursive
         sed -i "s|android-ndk-r27c|$ANDROID_NDK_HOME|g" aarch64-android-api30.txt
 
         meson setup build \
