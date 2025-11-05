@@ -35,6 +35,7 @@ jobs:
     - name: Test build
       run: |
         sed -i "s|android-ndk-r27c|$ANDROID_NDK_HOME|g" aarch64-android-api30.txt
+        export PKG_CONFIG_PATH=/data/sysroot/lib/pkgconfig:/data/sysroot/lib64/pkgconfig:$PKG_CONFIG_PATH
 
         meson setup build \
             --prefix=/data/share \
