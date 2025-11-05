@@ -1,0 +1,5 @@
+option('cap', type: 'boolean', value: true,
+       description: 'use caps')
+
+option('seccomp', type: 'boolean', value: true,
+       description: 'use seccomp')
