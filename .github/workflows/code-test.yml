@@ -1,0 +1,41 @@
+name: Tests
+on:
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build test
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Android NDK
+      uses: nttld/setup-ndk@v1
+      with:
+        ndk-version: r27c
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get install -y -qq build-essential pipx python3-venv pkg-config cmake docbook2x \
+        python3-pip pipx
+        pipx ensurepath
+        pipx install meson==0.61
+        pipx install ninja
+        
+    - name: Test build
+      run: |
+        sed -i "s|android-ndk-r27c|$ANDROID_NDK_HOME|g" aarch64-android-api30.txt
+
+        meson setup build \
+            --prefix=/data/share \
+            --default-library=both \
+            --cross-file aarch64-android-api30.txt
+
+        meson compile -C build
+        sudo /usr/local/bin/ninja -C build install
+
+    - name: Upload artifacts rurima
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: android-aarch64-rurima-shared-api30
+        path: /data/share/*
