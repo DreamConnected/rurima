@@ -1,0 +1,21 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '20 9 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  sync:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: tgymnich/fork-sync@v2.0.10
+        with:
+          owner: Container-On-Android
+          base: main
+          head: main
+          pr_title: "Merge upstream branch 'main'"
+          pr_message: "Merge branch 'RuriOSS/rurima:main' into main"
+          auto_merge: false
