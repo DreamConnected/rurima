@@ -27,7 +27,8 @@ common_cc_flags = [
     '-Wno-unused-parameter',
     '-Wno-unused-but-set-variable',
     '-Wno-missing-field-initializers',
-    '-Wno-gnu-zero-variadic-macro-arguments'
+    '-Wno-gnu-zero-variadic-macro-arguments',
+    '-Wno-incompatible-pointer-types-discards-qualifiers'
 ]
 
 add_project_arguments(cc.get_supported_arguments(common_cc_flags), language: 'c')
@@ -81,7 +82,8 @@ rurima_sources = [
   'src/net.c',
   'src/shared.c',
   'src/signal.c',
-  'src/subcommand.c'
+  'src/subcommand.c',
+  'src/easteregg/daijin.c',
 ]
 
 rurima_deps = [
