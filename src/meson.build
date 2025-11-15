@@ -1,8 +1,3 @@
-# Rurima includes.
-rurima_includes = include_directories(
-    'include',
-    'ruri')
-
 ## libcatsh
 libcatsh_include_dir = include_directories('catsh/src/include')
 
